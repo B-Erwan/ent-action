@@ -1,0 +1,18 @@
+name: deploy
+on: [push]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0 # <-- clone with complete history
+      - name: Push
+        uses: heussd/mirror-to-bitbucket-github-action@v2
+        with:
+          username: erwan@marmelab.com
+          spacename: erwan8workspace
+          repository: test_action_bitbucket_2
+          password: ${{ secrets.BITBUCKET_PASSWORD }}
