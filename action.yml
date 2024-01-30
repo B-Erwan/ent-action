@@ -1,0 +1,30 @@
+name: "ReactAdmin Enterprise Edition Action"
+description: "Set up your CI to install EE packages"
+author: "Marmelab"
+branding:
+  icon: "file-plus"
+  color: "blue"
+env:
+  RA_EE_CI_TOKEN:
+    description: "ReactAdmin Enterprise Edition secret CI token"
+    required: true
+runs:
+  using: "composite"
+  steps:
+    # create `.npmrc` file to be used by npm or Yarn v1
+    - run: |
+        echo "
+        //registry.marmelab.com/:_authToken=${{ env.RA_EE_CI_TOKEN }}
+        @react-admin:registry=https://registry.marmelab.com
+        " >> $HOME/.npmrc
+      shell: bash
+    # create `.yarnrc.yml` file to be used by Yarn v2 or more
+    - run: |
+        echo '
+        npmScopes:
+          "react-admin":
+            npmAlwaysAuth: true
+            npmAuthToken: "${{ env.RA_EE_CI_TOKEN }}"
+            npmRegistryServer: "https://registry.marmelab.com"
+        ' >> $HOME/.yarnrc.yml
+      shell: bash
