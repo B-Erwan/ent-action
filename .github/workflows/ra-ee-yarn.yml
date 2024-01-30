@@ -22,6 +22,6 @@ jobs:
           CI_TOKEN: ${{secrets.RA_EE_CI_TOKEN}}
       - run: yarn set version ${{matrix.version}}
       - run: yarn -v
-      - run: yarn install
+      - run: yarn add @react-admin/ra-markdown
         env:
           YARN_ENABLE_IMMUTABLE_INSTALLS: false

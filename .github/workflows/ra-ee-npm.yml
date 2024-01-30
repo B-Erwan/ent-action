@@ -17,4 +17,4 @@ jobs:
         # uses: react-admin/ra-enterprise-action@1.0.0
         env:
           CI_TOKEN: ${{secrets.RA_EE_CI_TOKEN}}
-      - run: npm install
+      - run: npm install --save @react-admin/ra-markdown
